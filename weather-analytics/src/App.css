@@ -1,42 +1,85 @@
-#root {
-  max-width: 1280px;
-  /* margin: 0 auto;
-  padding: 1rem; */
-  /* text-align: center; */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* optional but recommended */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+.app-container {
+  border: 2px solid blueviolet;
+  /* padding: 1rem; */
+  display: flex;
+  flex-direction: column;
+}
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+/* border: 1px dotted red; */
+background-color: dimgrey;
+border-bottom: 1px dashed white;
+}
+.header-title {
+  width: 70%;
+  /* border: 1px dotted black; */
+  
+}
+.header-units-conversion {
+  width: 29%;
+  /* border: 1px dotted red; */
+}
+.header-title, .header-units-conversion {
+  display: flex;          
+  justify-content: center; 
+  align-items: center;
+}
+.search-container {
+  height: 20vh;
+  background-color:ivory;
+  display: flex;
+  flex-direction: column;
+}
+.form-container {
+  display: flex;
+  flex-direction: row;
+}
+.form-container .form-container-child {
+  border: 1px solid black;
 }
 
-/* .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.search-container-child {
+  border: 1px solid brown;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.search-container-form {
+  height: 50%;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.search-container-cities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+} 
+.search-container-cities-card {
+  width: 120px;           /* Fixed width */
+  height: 60px;           /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #f0f8ff;
+  position: relative;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-container-cities-card button {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  /* border-radius: 50%; */
+  color: black;
+  font-weight: bold;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

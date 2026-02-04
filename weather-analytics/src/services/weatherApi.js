@@ -5,7 +5,7 @@ const weatherApi = axios.create({
     baseURL:'http://api.openweathermap.org',
     //default params applied to all the request
     params: {
-        appid: import.meta.env.API_KEY
+        appid: import.meta.env.VITE_API_KEY
     }
 })
 export default weatherApi;
