@@ -2,11 +2,10 @@ function Header() {
 return (
     <>
     <div className="header-container">
-        <div className="header-title">
-            <h1>Weather analytics</h1>
-        </div>
-        <div className="header-units-conversion">
-            <h2>Toggle Btn</h2>
+        <h1 className="header-title">Weather Analytics</h1>
+        <div className="unit-toggle-container">
+            <span className="unit-toggle-label">°C / °F</span>
+            {/* Your toggle switch here */}
         </div>
     </div>
     </>

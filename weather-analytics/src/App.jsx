@@ -55,12 +55,12 @@ function App() {
           {/* <Search cities={cities} onAddCity={addCity} onFetchAll={fetchAllCitiesForecast} isLoading={isLoading} forecasts={forecast}/> */}
           <Search cities={cities} onAddCity={addCity} onFetchAll={fetchAllCitiesForecast} isLoading={isLoading} forecasts={forecast} onRemoveCity={removeCity}/>
         </div>
-        <div className='cards'>
+        {/* <div className='cards'>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui illum vitae hic eaque?
         </div>
         <div className='forecast-section'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit harum aut quia, dolorem dolorum pariatur?
-        </div>
+        </div> */}
       </div>
     </>
   )

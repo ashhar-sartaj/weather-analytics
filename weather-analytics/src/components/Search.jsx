@@ -301,10 +301,10 @@ return (
                 </div>
                 <div className="form-container-child">
                     <button type="button" onClick={handleAddCity}>Add City</button>
-                    <button type="button" onClick={onFetchAll}>Fetch forecast</button>
                 </div>
             </div>
         </form>
+            <button type="button" onClick={onFetchAll} className="fetch-forecast-btn">Fetch forecast</button>
         {/* {error && (
             <div className="search-error">
                 {error}
@@ -312,21 +312,30 @@ return (
             </div>
             
         )} */}
-        <div className="search-container-child search-container-cities">
-            {/* ['IN,110001 Delhi', 'CN,100000 Beijing']  state of cities*/}
+        {/* ['IN,110001 Delhi', 'CN,100000 Beijing']  state of cities*/}
+        {/* <div className="search-container-child search-container-cities">
+            
 
+            
+        </div> */}
+        <div className="search-container-child search-container-cities" >
             {cities.length > 0 && (
                 cities.map((city, index) => {
                     const location = city.split(' ')[0]; //'IN,110001'
                     const cityname = city.split(' ').slice(1).join(' '); //'Delhi'
                     return (
-                    <div key={index} className="search-container-cities-card">
-                        {cityname}
-                        <button onClick={() => onRemoveCity(city)}>x</button>
-                    </div>)
+                        
+                            <div key={index} className="search-container-cities-card">
+                                {cityname}
+                                <button onClick={() => onRemoveCity(city)}>x</button>
+                            </div>
+                        
+                    )
                 })
             )}
         </div>
+
+        
     </div>
     </>
 )
