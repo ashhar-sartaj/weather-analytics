@@ -1,7 +1,12 @@
+// no need to pass the cities in the parent (app.jsx) ... use rtk (useDispatch) to directly store the state.
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCity, removeCity, weatherForecastForCity } from "../app/weatherSlice.js";
+import { geoCoordinatesForCity } from "../app/weatherSlice.js";
+import { fetchGeoCoordinates } from "../services/weatherApi.js";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-//<Search cities={cities} onAddCity={addCity} onFetchAll={fetchAllCitiesForecast} isLoading={isLoading} forecasts={forecast}/>
-function Search({cities, onAddCity, onFetchAll, isLoading, forecasts, onRemoveCity}) {
+function Search({cities, onFetchAll, isLoading, forecasts, onRemoveCity}) {
     const [zip, setZip] = useState('');
     const [countryCode, setCountryCode] = useState('');
 
@@ -247,6 +252,9 @@ function Search({cities, onAddCity, onFetchAll, isLoading, forecasts, onRemoveCi
         { code: 'KE', name: 'Kenya' },
         { code: 'MY', name: 'Malaysia' },
     ]
+    const dispatch = useDispatch();
+    // const currCityState = useSelector((state) => state.weather.cities);
+    const citiesInState = useSelector((state) => state.weather.cities);
 
     const handleCountryChange = (e) => {
         setCountryCode(e.target.value);
@@ -263,12 +271,43 @@ function Search({cities, onAddCity, onFetchAll, isLoading, forecasts, onRemoveCi
         console.log('just submitted')
     }
 
-    const handleAddCity = () => {
-        const locationKey = `${countryCode},${zip}`
-        onAddCity(locationKey);
-        //clear the state of countryCode and zip
+    const handleAddCity =  async () => {
+        //uisng the country code and zip code-- create an object, which is sent to app.jsx and then saved in cities state.
+    //    id should be 110001-IN, name: Delhi, zip: 110001, country: countryCode
+       const zipCode = zip.split(' ')[0]; 
+       const cityName = zip.slice(zip.indexOf(' ') + 1);
+        // so, id: zipCode-countryCode, name: cityName, zip: zipCode, country: countryCode
+        const locationKey = {
+            id: `${zipCode}-${countryCode}`,
+            name:`${cityName}`,
+            zip:`${zipCode}`,
+            country:`${countryCode}`
+        }
+        dispatch(addCity(locationKey))
+        //dispatch to get the geo coords.
+        // dispatch(fetchGeoCoordinates(locationKey.zip, locationKey.country)) //this wont work, coz Actions must be plain objects.. dispatch should include plain objects. 
         setCountryCode('');
         setZip('');
+
+        const geoCoordResponse = await dispatch(geoCoordinatesForCity(locationKey));
+        //'await' has no effect on the type of this expression. is typescript error.. it is not runtime error.so its safe
+        const geoCoord = unwrapResult(geoCoordResponse)
+        // const geoCoords = unwrapResult(resultAction);
+        console.log(geoCoord);
+        /*
+        {
+            "zip": "110001",
+            "name": "New Delhi",
+            "lat": 28.6369,
+            "lon": 77.2183,
+            "country": "IN"
+        }*/
+       const weatherForecastResponse = await dispatch(weatherForecastForCity(geoCoord));
+       const weatherForecast = unwrapResult(weatherForecastResponse);
+       console.log(weatherForecast);
+    }
+    const handleRemoveCity = (cityElementId) => {
+        dispatch(removeCity(cityElementId))
     }
     useEffect(() => {
         if (countryCode.trim().length === 0 || zip.trim().length === 0) return;
@@ -304,7 +343,9 @@ return (
                 </div>
             </div>
         </form>
-            <button type="button" onClick={onFetchAll} className="fetch-forecast-btn">Fetch forecast</button>
+            <button type="button" onClick={onFetchAll} className="fetch-forecast-btn" disabled={cities.length === 0 || isLoading}>
+                {!isLoading ? 'Fetch forecast': 'Fetching...'}
+            </button>
         {/* {error && (
             <div className="search-error">
                 {error}
@@ -319,7 +360,7 @@ return (
             
         </div> */}
         <div className="search-container-child search-container-cities" >
-            {cities.length > 0 && (
+            {/* {cities.length > 0 && (
                 cities.map((city, index) => {
                     const location = city.split(' ')[0]; //'IN,110001'
                     const cityname = city.split(' ').slice(1).join(' '); //'Delhi'
@@ -332,6 +373,14 @@ return (
                         
                     )
                 })
+            )} */}
+            {citiesInState.length > 0 && (
+                citiesInState.map(cityElement => (
+                    <div key={cityElement.id} className="search-container-cities-card">
+                        {cityElement.name}
+                        <button onClick={() => handleRemoveCity(cityElement.id)}>x</button>
+                    </div>
+                ))
             )}
         </div>
 
