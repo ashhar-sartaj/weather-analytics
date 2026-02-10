@@ -13,7 +13,7 @@ export const fetchGeoCoordinates = (zip, countryCode) => {
     return weatherApi.get('/geo/1.0/zip', {params: {zip:`${zip},${countryCode}`}});
 }
 //http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-export const fetchWeatherForecast = (lat, lon) => {
-    return weatherApi.get('/data/2.5/forecast', {params: {lat: lat, lon: lon}});
+export const fetchWeatherForecast = (lat, lon, unit) => {
+    return weatherApi.get('/data/2.5/forecast', {params: {lat: lat, lon: lon, units:unit}});
 }
 export default weatherApi;

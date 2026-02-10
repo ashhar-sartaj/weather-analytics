@@ -7,15 +7,19 @@ import Header from './components/Header'
 import Search from './components/Search'
 import { useDispatch, useSelector } from 'react-redux' //useSelector is used to read the state value from store 
 import { addCity } from './app/weatherSlice.js'
+import Cards from './components/Cards.jsx'
 
 
 function App() {
-  const [cities, setCities] = useState([]); //contains string in form of IN,90012,cityname
+  const [cities, setCities] = useState([]); 
   const [forecast, setForecast] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const citiesInState = useSelector((state) => state.weather.cities);
   console.log('cities in redux state: ',citiesInState)
+
+  const citiesForecast = useSelector((state) => state.weather.forecastById)
+  console.log("forecast by id: ", citiesForecast)
 
   // addCity(citiesInState, locationKey);
 
@@ -138,12 +142,9 @@ function App() {
           {/* <Search cities={cities} onAddCity={addCity} onFetchAll={fetchAllCitiesForecast} isLoading={isLoading} forecasts={forecast}/> */}
           <Search cities={cities} onFetchAll={fetchAllCitiesForecast} isLoading={isLoading} forecasts={forecast} />
         </div>
-        {/* <div className='cards'>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui illum vitae hic eaque?
+        <div>
+          <Cards/>
         </div>
-        <div className='forecast-section'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit harum aut quia, dolorem dolorum pariatur?
-        </div> */}
       </div>
     </>
   )

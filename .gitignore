@@ -6,3 +6,8 @@ jspm_packages/
 .env
 .env.*
 !.env.example
+
+#some files that were made for self learning
+forecastResponse.json
+geoResponse.json
+src/components/CardsCopy.jsx

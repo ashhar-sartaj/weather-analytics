@@ -150,3 +150,30 @@ action for fulfilled state:
     },
     "payload":"undefined"
 }
+
+//cconsole of search.jsx:
+const geoCoord = unwrapResult(geoCoordResponse)
+        // const geoCoords = unwrapResult(resultAction);
+        console.log(geoCoord);
+{
+    "id": "110001-IN",
+    "data": {
+        "zip": "110001",
+        "name": "New Delhi",
+        "lat": 28.6369,
+        "lon": 77.2183,
+        "country": "IN"
+    }
+}
+
+//cityElement in CitySection.jsx looks like:
+{
+    "id": "110025-IN",
+    "zip": "110025",
+    "country": "IN",
+    "name": "Defence Colony Tehsil",
+    "lat": 28.5672,
+    "lon": 77.2725
+}
+
+

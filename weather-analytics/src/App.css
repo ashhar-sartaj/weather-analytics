@@ -36,13 +36,23 @@
 .unit-toggle-container {
   display: flex;
   align-items: center;
+  /* border: 1px solid black; */
   gap: 0.5rem;
+}
+.unit-toggle input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #007bff;  /* Blue checkbox */
+  cursor: pointer;
 }
 
 .unit-toggle-label {
   font-weight: 600;
   color: #495057;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  /* font-size: 1.1rem; */
+  cursor: pointer;
+  /* user-select: none; */
 }
 
 .search-container {
@@ -50,6 +60,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
 }
 .fetch-forecast-btn {
   width: 30%;
@@ -126,6 +137,11 @@
   width: 80%;
   align-self: center;
 }
+.errorInGeoFetching {
+  color: red;
+  font-weight:bolder;
+  text-align: center;
+}
 .search-container-cities {
   display: flex;
   flex-direction: row;
@@ -155,4 +171,54 @@
   /* border-radius: 50%; */
   color: #ccc;
   font-weight: bold;
+}
+.card-section-nocities {
+  text-align: center;
+  font-size:medium
+}
+.city-block {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 50px;
+  padding: 12px;
+}
+.city-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+.duration-btn {
+    padding: 6px 12px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+.duration-btn.active {
+  background: #222;
+  color: white;
+}
+.threeHourForecastTimestamp-card {
+  width: 240px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+}
+.temp {
+  font-size: 26px;
+  margin: 10px 0 4px;
+}
+.small {
+  font-size: 12px;
+  color: #666;
+}
+.parent {
+  display: flex;
+  justify-content: center;
+}
+.responsive-container {
+  width: 70%;
+  /* height: auto; */
+  justify-content: center;
 }
